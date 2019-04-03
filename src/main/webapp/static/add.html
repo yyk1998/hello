@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Add Page</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/asserts/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/static/asserts/css/dashboard.css" rel="stylesheet">
+    <!-- 插入公共是css -->
+	<#include "/static/commonPart/cssCommonPart.ftl" />
+</head>
+
+<body>
+<!--插入顶部-->
+<#include "/static/commonPart/topCommonPart.ftl" />
+<div class="container-fluid">
+    <div class="row">
+    	<!--插入左侧-->
+		<#include "/static/commonPart/leftCommonPart.ftl" />
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+            <#-- 这里是添加的from -->
+            <#if insertPersonTAG??>
+                <form action="/home/addSavePerson" method="post">
+                    <div class="form-group">
+                        <#if (SaveNameError)??>
+                            <#-- 代表此处为添加姓名 并且为出现了姓名错误信息-->
+                            <label>姓名</label>
+                            <input type="text" class="form-control" name="PersonModel.name"/>
+                            ${SaveNameError}
+                        <#else>
+                            <#-- 代表此处为姓名添加 -->
+                            <label>姓名</label>
+                            <input type="text" class="form-control" name="PersonModel.name"/>
+                        </#if>
+                    </div>
+                    <div class="form-group">
+                        <#if (SaveAgeError)??>
+                            <#-- 代表此处为添加年龄 并且为出现了年龄错误信息-->
+                            <label>年龄</label>
+                            <input type="text" class="form-control" name="PersonModel.age"/>
+                            ${SaveAgeError}
+                        <#else>
+                            <#-- 代表此处为年龄添加 -->
+                            <label>年龄</label>
+                            <input type="text" class="form-control" name="PersonModel.age"/>
+                        </#if>
+                    </div>
+                    <div class="form-group">
+                        <#if (SaveAddressError)??>
+                            <#-- 代表此处为添加姓名 并且为出现了姓名错误信息-->
+                            <label>地址</label>
+                            <input type="text" class="form-control" name="PersonModel.address"/>
+                            ${SaveAddressError}
+                        <#else>
+                            <#-- 代表此处为地址添加 -->
+                            <label>地址</label>
+                            <input type="text" class="form-control" name="PersonModel.address"/>
+                        </#if>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </#if>
+                
+
+
+            <#-- 这里是编辑的from -->
+            <#if updatePersonTAG??>
+                <form action="/home/updatePersonDb" method="post"">
+                	<input type="hidden" value="${MySession!}">
+                	<input name="id" type="hidden" value="${id}">${id}
+                    <div class="form-group">
+                        <#if (updateNameError)??>
+                            <#-- 代表此处为修改姓名 并且出现了错误 -->
+                            <label>修改姓名</label>
+                            <input type="text" class="form-control" name="updateName"/>
+                            ${updateNameError!"请输入1~30位的字符"}
+                        <#else>
+                            <#-- 代表此处为修改姓名 -->
+                            <label>修改姓名</label>
+                            <input type="text" class="form-control" name="updateName"/>
+                            <h6 style="font-size: 12px">${name!}</h6>
+                            <input type="hidden" name="defaultName" value="${name!}" />
+                        </#if>
+                    </div>
+                    <div class="form-group">
+                        <#if (updateAgeError)??>
+                            <#-- 代表此处为修改年龄 并且出现了错误 -->
+                            <label>修改年龄</label>
+                            <input type="text" class="form-control" name="updateAge"/>
+                            ${updateAgeError!"请输入1~3位的数字"}
+                        <#else>
+                            <#-- 代表此处为修改年龄 -->
+                            <label>修改年龄</label>
+                            <input type="text" class="form-control" name="updateAge"/>
+                            <h6 style="font-size: 12px">${age!}</h6>
+                            <input type="hidden" name="defaultAge" value="${age!}" />
+                        </#if>
+                    </div>
+                    <div class="form-group">
+                        <#if (updateAddressError)??>
+                            <#-- 代表此处为修改地址 并且出现了错误 -->
+                            <label>修改地址</label>
+                            <input type="text" class="form-control" name="updateAddress" placeholder="${errorAddress!}"/>
+                            ${updateAddressError!"请输入1~30位的字符"}
+                        <#else>
+                            <#-- 代表此处为修改姓地址 -->
+                            <label>修改地址</label>
+                            <input type="text" class="form-control" name="updateAddress"/>
+                            <h6 style="font-size: 12px">${address!}</h6>
+                            <input type="hidden" name="defaultAddress" value="${address!}" />
+                        </#if>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </#if>
+        </main>
+        </form>
+    </div>
+</div>
+<!-- 插入底部 -->
+<#include "/static/commonPart/buttonCommonPart.ftl" />
+</body>
+
+</html>

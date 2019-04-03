@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+ 
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+	<title>预订信息</title>
+	<link href="/static/asserts/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/asserts/css/signin.css" rel="stylesheet">
+</head>
+<body>
+	<div>
+        <div>
+            <div><a href="/reservation/add" align="center">新增用户</a></div>
+            <table border="2" width="50%" align="center">
+                <caption><h1>测试页面</h1></caption>            
+                <thead>
+                	<th>用户ID</th>
+                	<th>酒店ID</th>
+                	<th>预订人数</th>
+                	<th>入住时间</th>
+                	<th>离开时间</th>
+                	<th>预定房间数</th>
+                	<th>操作</th>
+                </thead>   
+                <tbody>     
+                <#list re as r>
+                <tr>
+                	<td>${r.u_id}</td>
+                	<td>${r.h_id}</td>
+                	<td>${r.r_number}</td>
+                	<td>${r.r_getInTime}</td>
+                	<td>${r.r_getOutTime}</td>
+                	<td>${r.r_num}</td>
+                	<td><a href="/reservation/edit/${r.r_id }">修改</a>
+                		<a href="/reservation/del/${r.r_id }">删除</a>
+                	</td>
+                </tr>
+                </#list>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</body>
+</html>

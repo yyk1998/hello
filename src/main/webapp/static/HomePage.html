@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Home Page</title>
+    <link href="/static/asserts/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/asserts/css/dashboard.css" rel="stylesheet">
+    <!-- 插入公共是css -->
+	<#include "/static/commonPart/cssCommonPart.ftl" />
+</head>
+
+<body>
+<!--插入顶部-->
+<#include "/static/commonPart/topCommonPart.ftl" />
+<div class="container-fluid">
+    <div class="row">
+    	<!--插入左侧-->
+		<#include "/static/commonPart/leftCommonPart.ftl" />
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <h2><a class="btn btn-sm btn-success" href="/home/addPerson">人员添加</a></h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                   <thead>
+                		<tr>
+                        	<th>#</th>
+                        	<th>name</th>
+                        	<th>age</th>
+                        	<th>address</th>
+                        	<th>操作</th>
+                    	</tr>
+                    </thead>
+	                    <tbody>
+							<#list personAll as person>
+								<tr>
+									<td> ${person.id} </td>
+									<td> ${person.name} </td>
+									<td> ${person.age} </td>
+									<td> ${person.address} </td>
+									<td>
+	                            		<a class="btn btn-sm btn-primary" href="/home/update/${person.id}">编辑</a>
+	                            		<button value="/home/delectPerson/${person.id}" type="submit" class="btn btn-sm btn-danger deletePerson">删除</button>
+	                        		</td>
+	                        	</tr>
+							</#list>
+						</tbody>
+                </table>
+            </div>
+        </main>
+        <form id="deletePersonForm" method="post" action="">
+            <input type="hidden" name="_method" value="delete"/>
+        </form>
+    </div>
+</div>
+
+<!-- 插入底部 -->
+<#include "/static/commonPart/buttonCommonPart.ftl" />
+<script>
+    $(function () {
+        $("button.deletePerson").click(function () {
+            $("#deletePersonForm").attr("action", $(this).val()).submit(); 
+        })
+    })
+</script>
+</body>
+
+</html>
